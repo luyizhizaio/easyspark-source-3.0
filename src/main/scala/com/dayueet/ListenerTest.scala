@@ -20,7 +20,7 @@ object ListenerTest {
       .option("inferSchema", "true")
       .option("header", "true")
       .load(fpath)
-    csvdf.select("movieids").show()
+    csvdf.select("name").show()
     val schema = csvdf.schema
     val df = spark.createDataFrame(csvdf.rdd.repartition(5).setName("xxxxxxxxxxxxxxxxxxxxxxxxx"), schema)
     //val df = spark.createDataFrame(csvdf.rdd.setName("xxxxxxxxxxxxxxxxxxxxxxxxx"), schema)
