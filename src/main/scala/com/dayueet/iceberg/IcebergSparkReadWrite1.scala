@@ -21,6 +21,8 @@ object IcebergSparkReadWrite1 {
       //设置为动态分区
       .set("spark.sql.sources.partitionOverwriteMode", "dynamic")
       .set("spark.sql.session.timeZone", "GMT+8")
+      //添加sql 扩展
+      .set("spark.sql.extensions","org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions")
       .setMaster("local[*]")
       .setAppName("table_operations")
     val spark = SparkSession.builder().config(sparkConf).getOrCreate()
@@ -36,7 +38,13 @@ object IcebergSparkReadWrite1 {
     //5.写数据
     //write2TableWithNewSchema
     //6.读取快照对应的数据（查看之前版本的的数据）
-    readSnapShots
+    //readSnapShots
+    //7.查看namespace
+//    showCurrentNamespace
+    readData()
+//    updateByCondition
+    deleteData
+    readData()
   }
 
   /**
@@ -117,5 +125,40 @@ object IcebergSparkReadWrite1 {
       .format("iceberg")
       .load("hadoop_prod.db.test1").show()
   }
+
+  /**
+   * 查看当前namespace
+   */
+  def showCurrentNamespace(): Unit ={
+    val spark = SparkSession.builder().getOrCreate()
+
+    val x= "SHOW CURRENT NAMESPACE"
+
+    spark.sql(x).show(false)
+  }
+
+  /**
+   * 更新数据操作
+   */
+  def updateByCondition(): Unit ={
+    //从spark3.1开始支持update
+    val spark = SparkSession.builder().getOrCreate()
+    val x= "UPDATE hadoop_prod.db.test1 SET grade = 10 where grade = 3"
+    spark.sql(x).show(false)
+
+  }
+
+
+  def deleteData()={
+    //从spark3.1开始支持update
+    val spark = SparkSession.builder().getOrCreate()
+    val x= "delete from hadoop_prod.db.test1 where grade = 4"
+    spark.sql(x).show(false)
+  }
+
+  def mergeInto(): Unit ={
+
+  }
+
 
 }

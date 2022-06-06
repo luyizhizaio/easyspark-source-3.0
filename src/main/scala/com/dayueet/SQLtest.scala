@@ -11,8 +11,7 @@ object SQLtest {
     val spark = SparkSession.builder().master("local").getOrCreate()
 
 
-    spark.createDataFrame(Seq(("a","b"),("b","c"))).show(false)
-
+    val df = spark.createDataFrame(Seq(("a","b"),("b","c")))
 
 
   }

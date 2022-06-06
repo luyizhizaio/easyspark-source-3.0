@@ -18,7 +18,8 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <spark.version>3.1.1</spark.version>
     <scala.version>2.12</scala.version>
-    <hadoop.version>3.2.0</hadoop.version>
+    <hadoop.version>3.1.0</hadoop.version>
+    <iceberg.version>0.13.1</iceberg.version>
   </properties>
 
 
@@ -74,6 +75,16 @@
     <artifactId>scala-library</artifactId>
     <version>2.12.8</version>
   </dependency>
+    <dependency>
+      <groupId>org.apache.iceberg</groupId>
+      <artifactId>iceberg-spark-runtime-3.1_2.12</artifactId>
+      <version>${iceberg.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.iceberg</groupId>
+      <artifactId>iceberg-spark-extensions-3.1_2.12</artifactId>
+      <version>0.13.1</version>
+    </dependency>
   </dependencies>
 
   <!-- maven官方 http://repo1.maven.org/maven2/  或 http://repo2.maven.org/maven2/ （延迟低一些） -->
