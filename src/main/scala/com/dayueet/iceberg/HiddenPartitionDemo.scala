@@ -35,9 +35,9 @@ object HiddenPartitionDemo {
 
     //创建表
     //createtable
-//    write2Table
+    write2Table
 //    readData
-    descTBL
+//    descTBL
   }
 
   /**
@@ -60,11 +60,11 @@ object HiddenPartitionDemo {
     import org.apache.spark.sql.functions._
     import spark.implicits._
     val data = spark.createDataset[BgLog](
-      Array(BgLog("abcdefg", "imei", "lanqiu", "北京", new Timestamp(new Date().getTime)),
-        BgLog("1223", "idfa", "lanqiu", "合肥", new Timestamp(new Date().getTime)),
-        BgLog("12345", "imei", "lanqiu", "合肥", new Timestamp(new Date().getTime)),
-        BgLog("1223", "idfa", "lanqiu", "上海", new Timestamp(new Date().getTime)),
-        BgLog("abcdefg", "imei", "mz", "北京", new Timestamp(new Date().getTime)))
+      Array(BgLog("imei2", "imei", "loreal", "北京", new Timestamp(new Date().getTime)),
+        BgLog("idfa232", "idfa", "loreal", "合肥", new Timestamp(new Date().getTime)),
+        BgLog("imei12345", "imei", "lanqiu", "合肥", new Timestamp(new Date().getTime)),
+        BgLog("idfa1223", "idfa", "lanqiu", "上海", new Timestamp(new Date().getTime)),
+        BgLog("imeiabcdefg", "imei", "mz", "北京", new Timestamp(new Date().getTime)))
     )
     data.writeTo("hadoop_prod.db.bg_device_event").append()
   }
